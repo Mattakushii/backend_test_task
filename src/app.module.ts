@@ -2,6 +2,7 @@ import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { CatsController } from './cats/cats.controller';
 
 @Module({
   imports: [
@@ -14,10 +15,10 @@ import { TypeOrmModule } from '@nestjs/typeorm';
       database: 'postgres',
       entities: [],
       synchronize: true,
-      retryAttempts: 2,
+      retryAttempts: 5,
     }),
   ],
-  controllers: [AppController],
+  controllers: [AppController, CatsController],
   providers: [AppService],
 })
 export class AppModule {}
