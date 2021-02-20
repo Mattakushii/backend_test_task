@@ -1,8 +1,10 @@
+import { UsersService } from './users/users.service';
 import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { CatsController } from './cats/cats.controller';
+import { AuthModule } from './auth/auth.module';
+import { UsersModule } from './users/users.module';
 
 @Module({
   imports: [
@@ -17,8 +19,10 @@ import { CatsController } from './cats/cats.controller';
       synchronize: true,
       retryAttempts: 5,
     }),
+    AuthModule,
+    UsersModule,
   ],
-  controllers: [AppController, CatsController],
+  controllers: [AppController],
   providers: [AppService],
 })
 export class AppModule {}
