@@ -1,3 +1,5 @@
+import { ChatModule } from './module/chat.module';
+import { ChatEntity } from 'src/entity/chat.entity';
 import { UserEntity } from 'src/entity/user.entity';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { AppController } from './app.controller';
@@ -19,10 +21,12 @@ import { join } from 'path';
       database: 'backend_nest',
       username: 'postgres',
       password: 'secret',
-      entities: [UserEntity],
+      entities: [UserEntity, ChatEntity],
+      autoLoadEntities: true,
       synchronize: true,
     }),
     UserModule,
+    ChatModule,
   ],
   controllers: [AppController],
   providers: [AppService],

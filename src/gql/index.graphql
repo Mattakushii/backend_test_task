@@ -11,8 +11,15 @@ type UserEntity {
   isActive: Boolean!
 }
 
+type ChatEntity {
+  id: String!
+  chat_name: String!
+  users: [UserEntity!]!
+}
+
 type Query {
   users: [UserEntity!]!
+  chats: [ChatEntity!]!
 }
 
 type Mutation {

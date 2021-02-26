@@ -1,13 +1,26 @@
-import { PrimaryGeneratedColumn, Entity, Column } from 'typeorm';
+import { UserEntity } from 'src/entity/user.entity';
+import { Field, ObjectType } from '@nestjs/graphql';
+import {
+  PrimaryGeneratedColumn,
+  Entity,
+  Column,
+  ManyToMany,
+  JoinTable,
+} from 'typeorm';
 
 @Entity('chat')
+@ObjectType()
 export class ChatEntity {
   @PrimaryGeneratedColumn('increment')
-  id: number;
+  @Field()
+  id: string;
 
   @Column()
-  first_user: number;
+  @Field()
+  chat_name: string;
 
-  @Column()
-  second_user: number;
+  @ManyToMany((type) => UserEntity, (user) => user.id)
+  @JoinTable()
+  @Field((type) => [UserEntity])
+  users: UserEntity[];
 }
