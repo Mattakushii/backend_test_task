@@ -6,11 +6,12 @@ import {
   Column,
   ManyToOne,
   ManyToMany,
+  BaseEntity,
 } from 'typeorm';
 
 @Entity('chat')
 @ObjectType()
-export class ChatEntity {
+export class ChatEntity extends BaseEntity {
   @PrimaryGeneratedColumn('increment')
   @Field(() => Int)
   id: number;

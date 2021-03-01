@@ -1,4 +1,4 @@
-import { CreateChatInput } from 'src/dto/index.dto';
+import { CreateChatInput, UpdateChatInput } from 'src/dto/index.dto';
 import { UserEntity } from 'src/entity/user.entity';
 import {
   Resolver,
@@ -13,7 +13,7 @@ import { ChatService } from 'src/services/chat.service';
 
 @Resolver(() => ChatEntity)
 export class ChatResolver {
-  constructor(private chatService: ChatService) {}
+  constructor(private chatService: ChatService) { }
 
   @Query(() => [ChatEntity])
   chats(): Promise<ChatEntity[]> {
@@ -25,6 +25,11 @@ export class ChatResolver {
     @Args('createChatInput') createChatInput: CreateChatInput,
   ): Promise<ChatEntity> {
     return this.chatService.createChat(createChatInput);
+  }
+
+  @Mutation(() => ChatEntity)
+  updateChat(@Args('updateChatInput') updateChatInput: UpdateChatInput): Promise<ChatEntity> {
+    return this.chatService.updateChat(updateChatInput);
   }
 
   @ResolveField(() => UserEntity)

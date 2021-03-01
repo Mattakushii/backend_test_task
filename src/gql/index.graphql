@@ -28,6 +28,7 @@ type Query {
 type Mutation {
   createUser(createUserInput: CreateUserInput!): UserEntity!
   createChat(createChatInput: CreateChatInput!): ChatEntity!
+  updateChat(updateChatInput: UpdateChatInput!): ChatEntity!
 }
 
 input CreateUserInput {
@@ -39,5 +40,10 @@ input CreateUserInput {
 
 input CreateChatInput {
   owner_id: String!
+  chat_name: String!
+}
+
+input UpdateChatInput {
+  id: Int!
   chat_name: String!
 }
