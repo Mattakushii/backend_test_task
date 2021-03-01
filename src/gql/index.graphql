@@ -2,21 +2,21 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 # ------------------------------------------------------
 
-type ChatEntity {
-  id: Int!
-  owner_id: String!
-  chat_owner: UserEntity!
-  chat_name: String!
-  owner: UserEntity!
-}
-
 type UserEntity {
   id: String!
   firstName: String!
   lastName: String!
   username: String!
   password: String!
-  chats: [ChatEntity!]
+}
+
+type ChatEntity {
+  id: Int!
+  owner_id: String!
+  chat_owner: UserEntity!
+  users: [UserEntity!]!
+  chat_name: String!
+  owner: UserEntity!
 }
 
 type Query {

@@ -1,6 +1,5 @@
-import { ChatEntity } from 'src/entity/chat.entity';
 import { Field, ObjectType } from '@nestjs/graphql';
-import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
+import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
 
 @Entity('user')
 @ObjectType()
@@ -24,8 +23,4 @@ export class UserEntity {
   @Column('varchar')
   @Field()
   password: string;
-
-  @OneToMany(() => ChatEntity, (chat) => chat.chat_owner)
-  @Field(() => [ChatEntity], { nullable: true })
-  chats: ChatEntity[];
 }

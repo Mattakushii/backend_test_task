@@ -20,6 +20,7 @@ export class ChatService {
 
   createChat(createChatInput: CreateChatInput): Promise<ChatEntity> {
     const newChat = this.chatRepository.create(createChatInput);
+    console.log(newChat);
 
     return this.chatRepository.save(newChat);
   }

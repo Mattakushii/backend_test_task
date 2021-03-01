@@ -17,11 +17,11 @@ export class UsersService {
     return this.userRepository.save(newUser); // insert
   }
 
-  async findAll(): Promise<UserEntity[]> {
+  findAll(): Promise<UserEntity[]> {
     return this.userRepository.find();
   }
 
-  async findById(id: string): Promise<UserEntity> {
+  findById(id: string): Promise<UserEntity> {
     return this.userRepository.findOne(id);
   }
 }

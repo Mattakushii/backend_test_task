@@ -27,8 +27,4 @@ import { join } from 'path';
     ChatModule,
   ],
 })
-export class AppModule {
-  constructor() {
-    console.log(123);
-  }
-}
+export class AppModule {}
