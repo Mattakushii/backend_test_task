@@ -11,7 +11,7 @@ export class UsersService {
     private userRepository: Repository<UserEntity>,
   ) {}
 
-  addUser(createUserInput: CreateUserInput): Promise<UserEntity> {
+  createUser(createUserInput: CreateUserInput): Promise<UserEntity> {
     const newUser = this.userRepository.create(createUserInput); // a.k.a sql request
 
     return this.userRepository.save(newUser); // insert
@@ -19,5 +19,9 @@ export class UsersService {
 
   async findAll(): Promise<UserEntity[]> {
     return this.userRepository.find();
+  }
+
+  async findById(id: string): Promise<UserEntity> {
+    return this.userRepository.findOne(id);
   }
 }

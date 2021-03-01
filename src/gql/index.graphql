@@ -2,28 +2,32 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 # ------------------------------------------------------
 
+type ChatEntity {
+  id: Int!
+  owner_id: String!
+  chat_owner: UserEntity!
+  chat_name: String!
+  owner: UserEntity!
+}
+
 type UserEntity {
   id: String!
   firstName: String!
   lastName: String!
   username: String!
   password: String!
-  isActive: Boolean!
-}
-
-type ChatEntity {
-  id: String!
-  chat_name: String!
-  users: [UserEntity!]!
+  chats: [ChatEntity!]
 }
 
 type Query {
   users: [UserEntity!]!
+  getUserById(id: String!): UserEntity!
   chats: [ChatEntity!]!
 }
 
 type Mutation {
   createUser(createUserInput: CreateUserInput!): UserEntity!
+  createChat(createChatInput: CreateChatInput!): ChatEntity!
 }
 
 input CreateUserInput {
@@ -31,4 +35,9 @@ input CreateUserInput {
   lastName: String!
   username: String!
   password: String!
+}
+
+input CreateChatInput {
+  owner_id: String!
+  chat_name: String!
 }

@@ -1,4 +1,3 @@
-import { UserEntity } from 'src/entity/user.entity';
 import { Field, InputType } from '@nestjs/graphql';
 
 @InputType()
@@ -18,9 +17,9 @@ export class CreateUserInput {
 
 @InputType()
 export class CreateChatInput {
-  @Field()
-  chat_owner: UserEntity;
+  @Field(() => String)
+  owner_id: string;
 
   @Field()
-  chatName: string;
+  chat_name: string;
 }

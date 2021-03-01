@@ -2,10 +2,8 @@ import { ChatModule } from './module/chat.module';
 import { ChatEntity } from 'src/entity/chat.entity';
 import { UserEntity } from 'src/entity/user.entity';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { AppController } from './app.controller';
 import { UserModule } from './module/user.module';
 import { Module } from '@nestjs/common';
-import { AppService } from './app.service';
 import { GraphQLModule } from '@nestjs/graphql';
 import { join } from 'path';
 
@@ -28,7 +26,9 @@ import { join } from 'path';
     UserModule,
     ChatModule,
   ],
-  controllers: [AppController],
-  providers: [AppService],
 })
-export class AppModule {}
+export class AppModule {
+  constructor() {
+    console.log(123);
+  }
+}

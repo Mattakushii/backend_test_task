@@ -1,4 +1,13 @@
-import { Resolver, Query } from '@nestjs/graphql';
+import { CreateChatInput } from 'src/dto/index.dto';
+import { UserEntity } from 'src/entity/user.entity';
+import {
+  Resolver,
+  Query,
+  Parent,
+  ResolveField,
+  Mutation,
+  Args,
+} from '@nestjs/graphql';
 import { ChatEntity } from 'src/entity/chat.entity';
 import { ChatService } from 'src/services/chat.service';
 
@@ -9,5 +18,17 @@ export class ChatResolver {
   @Query(() => [ChatEntity])
   chats(): Promise<ChatEntity[]> {
     return this.chatService.findAll();
+  }
+
+  @Mutation(() => ChatEntity)
+  createChat(
+    @Args('createChatInput') createChatInput: CreateChatInput,
+  ): Promise<ChatEntity> {
+    return this.chatService.createChat(createChatInput);
+  }
+
+  @ResolveField(() => UserEntity)
+  owner(@Parent() chat: ChatEntity): Promise<UserEntity> {
+    return this.chatService.getOwner(chat.owner_id);
   }
 }
