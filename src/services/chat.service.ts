@@ -8,39 +8,39 @@ import { UserEntity } from 'src/entity/user.entity';
 
 @Injectable()
 export class ChatService {
-    constructor(
-        @InjectRepository(ChatEntity)
-        private chatRepository: Repository<ChatEntity>,
-        private usersService: UsersService,
-    ) { }
+  constructor(
+    @InjectRepository(ChatEntity)
+    private chatRepository: Repository<ChatEntity>,
+    private usersService: UsersService,
+  ) {}
 
-    findAll(): Promise<ChatEntity[]> {
-        return this.chatRepository.find();
+  findAll(): Promise<ChatEntity[]> {
+    return this.chatRepository.find();
+  }
+
+  async createChat(createChatInput: CreateChatInput): Promise<ChatEntity> {
+    const newChat = this.chatRepository.create(createChatInput);
+
+    return this.chatRepository.save(newChat);
+  }
+
+  async updateChat(updateChatInput: UpdateChatInput): Promise<ChatEntity> {
+    const chat = await this.findChatById(updateChatInput.id);
+
+    if (!chat) {
+      throw new Error('Chat not found.');
     }
 
-    async createChat(createChatInput: CreateChatInput): Promise<ChatEntity> {
-        const newChat = this.chatRepository.create(createChatInput);
+    Object.assign(chat, updateChatInput);
+    await chat.save();
+    return chat;
+  }
 
-        return this.chatRepository.save(newChat);
-    }
+  findChatById(id: number): Promise<ChatEntity> {
+    return this.chatRepository.findOne(id);
+  }
 
-    async updateChat(updateChatInput: UpdateChatInput): Promise<ChatEntity> {
-        const chat = await this.findChatById(updateChatInput.id)
-
-        if (!chat) {
-            throw new Error("Chat not found.")
-        }
-
-        Object.assign(chat, updateChatInput)
-        await chat.save()
-        return chat
-    }
-
-    findChatById(id: number): Promise<ChatEntity> {
-        return this.chatRepository.findOne(id)
-    }
-
-    getOwner(ownerId: string): Promise<UserEntity> {
-        return this.usersService.findById(ownerId);
-    }
+  getOwner(ownerId: string): Promise<UserEntity> {
+    return this.usersService.findById(ownerId);
+  }
 }

@@ -13,7 +13,7 @@ import { ChatService } from 'src/services/chat.service';
 
 @Resolver(() => ChatEntity)
 export class ChatResolver {
-  constructor(private chatService: ChatService) { }
+  constructor(private chatService: ChatService) {}
 
   @Query(() => [ChatEntity])
   chats(): Promise<ChatEntity[]> {
@@ -28,7 +28,9 @@ export class ChatResolver {
   }
 
   @Mutation(() => ChatEntity)
-  updateChat(@Args('updateChatInput') updateChatInput: UpdateChatInput): Promise<ChatEntity> {
+  updateChat(
+    @Args('updateChatInput') updateChatInput: UpdateChatInput,
+  ): Promise<ChatEntity> {
     return this.chatService.updateChat(updateChatInput);
   }
 

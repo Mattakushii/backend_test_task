@@ -27,8 +27,17 @@ export class CreateChatInput {
 @InputType()
 export class UpdateChatInput {
   @Field(() => Int)
-  id: number
+  id: number;
 
   @Field()
-  chat_name: string
+  chat_name: string;
+}
+
+@InputType()
+export class SignInInput {
+  @Field()
+  username: string;
+
+  @Field()
+  password: string;
 }
