@@ -11,7 +11,11 @@ export class UsersService {
   constructor(
     @InjectRepository(UserEntity)
     private userRepository: Repository<UserEntity>,
-  ) {}
+  ) { }
+
+  async createToken({ id, username }: UserEntity) {
+    return await jwt.sign({ id, username }, 'secret');
+  }
 
   async createUser(createUserInput: CreateUserInput): Promise<UserEntity> {
     const hash = await bcrypt.hash(createUserInput.password, 10);
@@ -31,11 +35,7 @@ export class UsersService {
     return await bcrypt.compare(signInInput.password, user.password);
   }
 
-  createToken({ id, username }: UserEntity) {
-    return jwt.sign({ id, username }, 'secret');
-  }
-
-  updateUser() {}
+  updateUser() { }
 
   async removeUser(id: string) {
     const user = await this.findById(id);
@@ -45,7 +45,7 @@ export class UsersService {
   }
 
   async findByUsername(username: string): Promise<UserEntity> {
-    return this.userRepository.findOneOrFail({ where: username });
+    return this.userRepository.findOneOrFail({ username: username });
   }
 
   async findAll(): Promise<UserEntity[]> {

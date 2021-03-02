@@ -11,12 +11,13 @@ import { join } from 'path';
   imports: [
     GraphQLModule.forRoot({
       autoSchemaFile: join(process.cwd(), 'src/gql/index.graphql'),
+      context: ({ req }) => ({ header: req.headers })
     }),
     TypeOrmModule.forRoot({
       type: 'postgres',
-      host: 'localhost',
+      host: '192.168.0.2',
       port: 5432,
-      database: 'backend_nest',
+      database: 'backend',
       username: 'postgres',
       password: 'secret',
       entities: [UserEntity, ChatEntity],
@@ -27,4 +28,4 @@ import { join } from 'path';
     ChatModule,
   ],
 })
-export class AppModule {}
+export class AppModule { }

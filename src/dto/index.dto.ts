@@ -41,3 +41,18 @@ export class SignInInput {
   @Field()
   password: string;
 }
+
+@InputType()
+export class LoginInput {
+  @Field()
+  username: string
+
+  @Field()
+  password: string
+}
+
+@InputType()
+export class Token {
+  @Field()
+  token: string
+}

@@ -20,15 +20,22 @@ type ChatEntity {
 }
 
 type Query {
+  me: UserEntity!
   users: [UserEntity!]!
   getUserById(id: String!): UserEntity!
   chats: [ChatEntity!]!
 }
 
 type Mutation {
+  login(loginInput: LoginInput!): String!
   createUser(createUserInput: CreateUserInput!): UserEntity!
   createChat(createChatInput: CreateChatInput!): ChatEntity!
   updateChat(updateChatInput: UpdateChatInput!): ChatEntity!
+}
+
+input LoginInput {
+  username: String!
+  password: String!
 }
 
 input CreateUserInput {
